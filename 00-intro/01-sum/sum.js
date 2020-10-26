@@ -1,4 +1,4 @@
-/**
+/*
  * Функция, возвращающая сумму двух чисел
  *
  * @param {Number} a - первое число
@@ -6,5 +6,7 @@
  * @return {Number} сумма чисел a и b
  */
 export function sum(a, b) {
-  // Решение
+  return a + b;
 }
+
+sum(2, 55);

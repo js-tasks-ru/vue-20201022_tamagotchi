@@ -1,6 +1,5 @@
 const { getSolutionPath } = require('taskbook-test-utils');
 const { sum } = require(getSolutionPath('sum'));
-
 describe('intro/sum', () => {
   describe('Функция sum', () => {
     it('Функция sum быть определена', () => {
