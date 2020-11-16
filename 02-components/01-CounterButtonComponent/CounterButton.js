@@ -1,6 +1,6 @@
 export const CounterButton = {
   // Шаблон потребуется отредактировать
-  template: `<button type="button"  @click="addCounter(count)">{{ count }}</button>`,
+  template: `<button type="button"  @click="addCounter">{{ count }}</button>`,
 
   // Компонент должен иметь входной параметр
 
@@ -18,8 +18,8 @@ export const CounterButton = {
     },
   },
   methods: {
-    addCounter(count) {
-      this.$emit('increment', count + 1);
+    addCounter() {
+      this.$emit('increment', this.count + 1);
     },
   },
 };
