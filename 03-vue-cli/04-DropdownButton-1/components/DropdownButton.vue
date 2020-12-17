@@ -1,28 +1,25 @@
 <template>
-  <div class="dropdown" :class="{ show: items }">
+  <div class="dropdown" :class="{ show: isOpen }">
     <button
       type="button"
       class="button dropdown__toggle"
-      :class="{ dropdown__toggle_icon: value }"
-      @click="items = !items"
+      :class="{ dropdown__toggle_icon: hasIcons }"
+      @click="toggleOpen"
     >
-      <template v-if="!value">
-        {{ title }}
-      </template>
-      <template v-else>
-        <app-icon icon="coffee" />
-        {{ title }} - {{ value }}
-      </template>
+      <app-icon v-if="selected && selected.icon" :icon="selected.icon" />
+      <span>
+        {{ title }}<template v-if="selected"> - {{ selected.text }}</template>
+      </span>
     </button>
 
-    <div class="dropdown__menu" :class="{ show: items }">
+    <div class="dropdown__menu" :class="{ show: isOpen }">
       <button
-        class="dropdown__item dropdown__item_icon"
-        type="button"
         v-for="option in options"
-        :key="option.text"
-        :value="option.text"
-        @click="changeState"
+        :key="option.value"
+        class="dropdown__item"
+        :class="{ dropdown__item_icon: hasIcons }"
+        @click="select(option)"
+        type="button"
       >
         <app-icon v-if="option.icon" :icon="option.icon" />
         {{ option.text }}
@@ -38,32 +35,49 @@ export default {
   name: 'DropdownButton',
 
   components: { AppIcon },
-  data() {
-    return {
-      items: false,
-    };
+
+  model: {
+    prop: 'value',
+    event: 'change',
   },
+
   props: {
+    options: {
+      type: Array,
+      required: true,
+    },
+    value: {},
     title: {
       type: String,
       required: true,
     },
-    options: {
-      type: Array,
+  },
+
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
+
+  computed: {
+    selected() {
+      return this.options.find((option) => option.value === this.value);
     },
-    value: {
-      type: String,
+
+    hasIcons() {
+      return Object.values(this.options).some((option) => option.icon);
     },
   },
+
   methods: {
-    changeState(event) {
-      this.$emit('change', event.target.value);
-      this.items = false;
+    toggleOpen() {
+      this.isOpen = !this.isOpen;
     },
-  },
-  model: {
-    prop: 'value',
-    event: 'change',
+
+    select(option) {
+      this.isOpen = false;
+      this.$emit('change', option.value);
+    },
   },
 };
 </script>
@@ -89,38 +103,6 @@ export default {
 .button.button_block {
   display: block;
   width: 100%;
-}
-
-.button.button_primary {
-  background-color: var(--blue);
-  border-color: var(--blue);
-  color: var(--white);
-}
-
-.button.button_primary:hover {
-  background-color: var(--blue-light);
-  border-color: var(--blue-light);
-  color: var(--blue);
-}
-
-.button.button_secondary {
-  background-color: var(--white);
-  border-color: var(--blue);
-  color: var(--blue);
-}
-
-.button.button_secondary:hover {
-  border-color: var(--blue-light);
-}
-
-.button.button_danger {
-  background-color: var(--white);
-  border-color: var(--red);
-  color: var(--red);
-}
-
-.button.button_danger:hover {
-  border-color: var(--red-light);
 }
 
 .dropdown {

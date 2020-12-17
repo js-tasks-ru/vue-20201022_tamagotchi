@@ -12,7 +12,6 @@ export const router = new VueRouter({
   routes: [
     {
       path: '/page-a',
-      alias: '/',
       component: PageA,
     },
     {
