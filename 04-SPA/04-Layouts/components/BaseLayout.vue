@@ -1,8 +1,20 @@
-<template></template>
+<template>
+  <div>
+    <Header />
+    <router-view></router-view>
+    <Footer />
+  </div>
+</template>
 
 <script>
+import Header from './TheHeader';
+import Footer from './TheFooter';
 export default {
   name: 'BaseLayout',
+  components: {
+    Header,
+    Footer,
+  },
 };
 </script>
 
