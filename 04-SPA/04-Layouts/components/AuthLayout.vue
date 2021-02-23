@@ -1,12 +1,10 @@
 <template>
-  <main class="main">
-    <div class="page page_onboarding">
-      <div class="container">
-        <h1 class="page__title text-center">{{ title }}</h1>
-        <slot></slot>
-      </div>
+  <div class="page page_onboarding">
+    <div class="container">
+      <h1 class="page__title text-center">{{ title }}</h1>
+      <slot></slot>
     </div>
-  </main>
+  </div>
 </template>
 
 <script>

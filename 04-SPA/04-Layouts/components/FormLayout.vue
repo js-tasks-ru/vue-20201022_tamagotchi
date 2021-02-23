@@ -1,12 +1,10 @@
 <template>
-  <main class="main">
-    <div class="page page_meetup-forms">
-      <div class="container">
-        <h2 class="page__title">{{ title }}</h2>
-        <slot></slot>
-      </div>
+  <div class="page page_meetup-forms">
+    <div class="container">
+      <h2 class="page__title">{{ title }}</h2>
+      <slot></slot>
     </div>
-  </main>
+  </div>
 </template>
 
 <script>

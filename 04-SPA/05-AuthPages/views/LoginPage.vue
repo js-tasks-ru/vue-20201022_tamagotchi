@@ -3,20 +3,27 @@
     <div class="form-group">
       <label class="form-label">Email</label>
       <div class="input-group">
-        <input type="email" placeholder="demo@email" class="form-control" v-model="email" />
+        <input
+          type="email"
+          placeholder="demo@email"
+          class="form-control"
+          v-model="email"
+        />
       </div>
     </div>
     <div class="form-group">
       <label class="form-label">Пароль</label>
       <div class="input-group">
-        <input type="password" placeholder="password" class="form-control" v-model="password" />
+        <input
+          type="password"
+          placeholder="password"
+          class="form-control"
+          v-model="password"
+        />
       </div>
     </div>
     <div class="form__buttons">
-      <button
-        type="submit"
-        class="button button_primary button_block"
-      >
+      <button type="submit" class="button button_primary button_block">
         Войти
       </button>
     </div>
@@ -47,12 +54,11 @@ export default {
       } else if (this.password === '') {
         return alert('Требуется ввести пароль');
       }
-      await login(this.email, this.password)
-        .then((obj) => {
+      await login(this.email, this.password).then((obj) => {
         if (obj.fullname) {
           return alert(obj.fullname);
         } else {
-          return alert('Неверные учетные данные');
+          return alert(obj.message);
         }
       });
     },
