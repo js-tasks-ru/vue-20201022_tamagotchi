@@ -63,7 +63,11 @@ export default {
       if (!queries.search) {
         delete queries.search;
       }
-      return this.$router.push({ query: queries });
+      return this.$router.push({ query: queries }).catch((err) => {
+        if (err.name !== 'NavigationDuplicated') {
+          throw err;
+        }
+      });
     },
   },
 };
