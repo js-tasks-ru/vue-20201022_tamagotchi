@@ -1,14 +1,13 @@
 <template>
-  <button
+  <component
     :is="tag"
     class="button"
     :class="{ button_block: block }"
-    :href="href"
-    :target="target"
+    v-bind="$attrs"
     v-on="$listeners"
   >
-    <slot name="default"></slot>
-  </button>
+    <slot></slot>
+  </component>
 </template>
 
 <script>
@@ -25,13 +24,6 @@ export default {
         return ['button', 'a', 'router-link'].indexOf(value) !== -1;
       },
     },
-  },
-
-  data() {
-    return {
-      href: '',
-      target: '',
-    };
   },
 };
 </script>

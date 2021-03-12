@@ -1,31 +1,22 @@
 <template>
   <div
     class="input-group"
-    :class="{ 'input-group_icon': hasIcon, 'input-group_icon-left': leftIcon, 'input-group_icon-right': rightIcon }"
+    :class="{
+      'input-group_icon': hasIcon,
+      'input-group_icon-left': leftIcon,
+      'input-group_icon-right': rightIcon,
+    }"
   >
-    <slot name="left-icon">
-      <img class="icon" />
-    </slot>
-    <input
+    <slot name="left-icon"></slot>
+    <component
+      :is="formControlTag"
       class="form-control"
       :class="{ 'form-control_sm': small, 'form-control_rounded': rounded }"
-      v-if="!multiline"
       v-bind="$attrs"
-      :value="value"
+      :value.prop="value"
       v-on="listeners"
     />
-    <textarea
-      class="form-control"
-      :class="{ 'form-control_sm': small, 'form-control_rounded': rounded }"
-      v-else
-      v-bind="$attrs"
-      :value="value"
-      v-on="listeners"
-    ></textarea>
-
-    <slot name="right-icon">
-      <img class="icon" />
-    </slot>
+    <slot name="right-icon"></slot>
   </div>
 </template>
 
@@ -43,6 +34,32 @@ export default {
     prop: 'value',
     event: 'input',
   },
+  data() {
+    return {
+      hasIcon: false,
+      leftIcon: false,
+      rightIcon: false,
+    };
+  },
+  mounted() {
+    this.updateIcon();
+  },
+  updated() {
+    this.updateIcon();
+  },
+  methods: {
+    updateIcon() {
+      if (!!this.$slots['left-icon'] || !!this.$slots['right-icon']) {
+        this.hasIcon = true;
+      }
+      if (this.$slots['left-icon']) {
+        this.leftIcon = true;
+      }
+      if (this.$slots['right-icon']) {
+        this.rightIcon = true;
+      }
+    },
+  },
   computed: {
     listeners() {
       return {
@@ -51,14 +68,8 @@ export default {
         change: ($event) => this.$emit('change', $event.target.value),
       };
     },
-    hasIcon() {
-      return this.$slots;
-    },
-    leftIcon() {
-      return this.$slots['left-icon'];
-    },
-    rightIcon() {
-      return this.$slots['right-icon'];
+    formControlTag() {
+      return this.multiline ? 'textarea' : 'input';
     },
   },
 };

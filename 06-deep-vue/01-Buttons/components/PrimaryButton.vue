@@ -1,6 +1,6 @@
 <template>
   <base-button class="button_primary" v-bind="$attrs" v-on="$listeners">
-    <slot v-slot:default></slot>
+    <slot></slot>
   </base-button>
 </template>
 

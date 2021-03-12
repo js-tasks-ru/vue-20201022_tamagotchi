@@ -2,7 +2,7 @@
   <div class="image-uploader">
     <label
       class="image-uploader__preview image-uploader__preview-loading"
-      :style="imageId ? { '--bg-url': `url(${getImageURL(imageId)})` } : ''"
+      :style="imageId ? { '--bg-image': `url(${getImageURL(imageId)})` } : ''"
     >
       <span v-if="imageId !== null">Удалить изображение</span>
       <span v-else-if="loading">Загрузка...</span>
