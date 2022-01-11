@@ -61,7 +61,7 @@ export const getAgendaItemsFieldSpecifications = () => {
         component: 'app-input',
         model: { prop: 'value', event: 'input' },
         props: {
-          multiline: true,
+          textarea: true,
         },
       },
       {
