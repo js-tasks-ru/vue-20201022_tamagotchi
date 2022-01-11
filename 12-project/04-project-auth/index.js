@@ -1,1 +1,1 @@
-export const LINK = '';
+export const LINK = 'https://github.com/USER/REPOSITORY';
