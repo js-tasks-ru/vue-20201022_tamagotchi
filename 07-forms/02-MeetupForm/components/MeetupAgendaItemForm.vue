@@ -12,7 +12,6 @@
             class="form-control"
             type="time"
             placeholder="00:00"
-            :value="agendaItem.startsAt"
             @change="
               $emit('update:agendaItem', {
                 ...agendaItem,
@@ -29,7 +28,6 @@
             class="form-control"
             type="time"
             placeholder="00:00"
-            :value="agendaItem.endsAt"
             @change="
               $emit('update:agendaItem', {
                 ...agendaItem,

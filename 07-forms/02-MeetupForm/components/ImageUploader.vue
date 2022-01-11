@@ -1,8 +1,8 @@
 <template>
-  <div @click.stop="fileSelected">
+  <div>
     <p v-if="value">Selected ImageId = {{ value }}</p>
     <p v-else>Image is not selected</p>
-    <input type="file" @click.prevent />
+    <input type="file" @click.prevent="fileSelected" />
   </div>
 </template>
 
